@@ -35,21 +35,20 @@ bank = {
 }
 
 
-# TODO check if resource sufficient
 def resource_check(drink_name):
+    """confirms if resources are sufficient, indicates insufficient resources"""
     needed_water = MENU[drink_name]["ingredients"]["water"]
     needed_coffee = MENU[drink_name]["ingredients"]["coffee"]
 
-    # TODO orders with milk
+    # orders with milk
     if "milk" in MENU[drink_name]["ingredients"]:
         needed_milk = MENU[drink_name]["ingredients"]["milk"]
         if resources["water"] >= needed_water and resources["coffee"] >= needed_coffee and resources["milk"] >= needed_milk:
             return True
-            # TODO orders with not enough supplies
         if resources["milk"] < needed_milk:
             print("Sorry, you don't have enough milk")
 
-    # TODO for espresso
+    # TODO for general orders
     if resources["water"] >= needed_water and resources["coffee"] >= needed_coffee:
         return True
     if resources["water"] < needed_water:
@@ -60,6 +59,7 @@ def resource_check(drink_name):
 
 # TODO Print report
 def report():
+    """Prints the current resources and money in the machine"""
     print("the current resources are: ")
     print(f"Water : {resources.get('water')} ml.")
     print(f"Milk  : {resources.get('milk')} ml.")
@@ -69,6 +69,7 @@ def report():
 
 # TODO process coins
 def process_money():
+    """inputs coins and returns total amount"""
     print("Please input coins below")
     quarters = int(input("How many quarters? "))
     dimes = int(input("How many dimes? "))
@@ -81,6 +82,7 @@ def process_money():
 
 # TODO transaction successful
 def transaction_money(amount, drink):
+    """checks if the amount is sufficient, returns change, adds money tobank"""
     print(f"The amount in total is ${amount}")
     print(f"The price is ${MENU[drink]['cost']}")
     if MENU[drink]["cost"] > amount:
@@ -98,6 +100,7 @@ def transaction_money(amount, drink):
 
 # TODO Make Coffee deduct resources
 def make_coffee(drink_name):
+    """makes the drink, deducts resources, returns remaining resources"""
     print(f"Here is your {drink_name}. Enjoy!")
     needed_water = MENU[drink_name]["ingredients"]["water"]
     needed_coffee = MENU[drink_name]["ingredients"]["coffee"]
